@@ -27,7 +27,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public Response getUserInfo(String emailId) {
         System.out.println(emailId);
-        User user = (User)userRepo.findByEmailId(emailId);
+        User user = null;
+        try{
+            user   = (User)userRepo.findByEmailId(emailId);
+
+            if(user == null){
+                Response response = new Response(HttpStatus.NOT_FOUND.toString(),"Email id does not exist","");
+                return response;
+            }
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+        }
+
         System.out.println(user.toString());
         System.out.println(user.getEmailId());
         UserResponse userResponse = new UserResponse(user.getUsername(),user.getEmailId(),user.getContactNumber(),user.getGender());
