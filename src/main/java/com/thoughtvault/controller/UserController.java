@@ -20,8 +20,8 @@ public class UserController {
     }
     @GetMapping("/getUserInfo/{emailId}")
     private Response getUserInfo(@PathVariable("emailId") String emailId){
-
-        return userServiceImpl.getUserInfo(emailId);
+        System.out.println(emailId);
+       return  userServiceImpl.getUserInfo(emailId);
 
     }
     @PostMapping("/resetPassword")
